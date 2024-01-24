@@ -15,4 +15,43 @@ export class PostsService {
     console.log(test);
     return test;
   }
+
+  async writePost(data: {
+    title: string;
+    contents: string;
+    category: string;
+    isDelete: number;
+  }) {
+    const { title, contents, category, isDelete } = data;
+    console.log(data);
+    const post = await this.postsRepository.save({
+      title: title,
+      contents: contents,
+      category: category,
+      is_delete: isDelete,
+    });
+    return post;
+  }
+
+  async modifyPost(data: {
+    postId: any;
+    title: string;
+    contents: string;
+    category: string;
+    isDelete: number;
+  }) {
+    const { postId, title, contents, category, isDelete } = data;
+    const update = await this.postsRepository.update(
+      { post_id: postId },
+      {
+        title: title,
+        contents: contents,
+        category: category,
+        is_delete: isDelete,
+      }
+    );
+    console.log("dads");
+    console.log(update?.affected);
+    return { affected: update?.affected };
+  }
 }

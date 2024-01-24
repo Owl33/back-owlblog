@@ -13,5 +13,5 @@ export class PostsEntity extends CommonEntity {
   category: string;
 
   @Column("int", { unique: false, nullable: false })
-  delete: number;
+  is_delete: number;
 }
