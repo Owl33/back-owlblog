@@ -22,7 +22,7 @@ const setDatabase = TypeOrmModule.forRootAsync({
     synchronize: false, // 무조건 false로 해두세요.
     logging: true, // typeorm 쿼리 실행시, MySQL의 쿼리문을 터미널에 보여줍니다.
     timezone: "local",
-    entities: [path.join(__dirname, "/entities/**/*.entity.{js, ts}")],
+    entities: [path.join(__dirname, "/*/entity/*.entity.{js, ts}")],
     retryAttempts: 5, // 연결에 실패했을 경우, 연결 재시도 횟수를 의미합니다.
   }),
 });

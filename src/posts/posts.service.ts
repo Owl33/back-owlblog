@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { PostsEntity } from "./entity/posts.entity";
 import { Repository } from "typeorm";
@@ -11,9 +11,18 @@ export class PostsService {
   ) {}
 
   async getPosts() {
-    const test = await this.postsRepository.find();
-    console.log(test);
-    return test;
+    const posts = await this.postsRepository.find();
+    return posts;
+  }
+
+  async getPost(postId: number) {
+    const post = await this.postsRepository.findOne({
+      where: { post_id: postId },
+    });
+    if (!post) {
+      throw new BadRequestException("포스트를 찾지 못했습니다.");
+    }
+    return post;
   }
 
   async writePost(data: { title: string; contents: string; category: string }) {
@@ -28,13 +37,20 @@ export class PostsService {
   }
 
   async modifyPost(data: {
-    postId: any;
+    postId: number;
     title: string;
     contents: string;
     category: string;
   }) {
     const { postId, title, contents, category } = data;
-    const update = await this.postsRepository.update(
+    const targetPost = await this.postsRepository.findOne({
+      where: { post_id: postId },
+    });
+    if (!targetPost) {
+      throw new BadRequestException("포스트를 찾지 못했습니다.");
+    }
+
+    const res = await this.postsRepository.update(
       { post_id: postId },
       {
         title: title,
@@ -42,8 +58,22 @@ export class PostsService {
         category: category,
       }
     );
-    console.log("dads");
-    console.log(update?.affected);
-    return { affected: update?.affected };
+
+    return { affected: res?.affected };
+  }
+
+  async deletePost(data: { postId: number }) {
+    const { postId } = data;
+    const targetPost = await this.postsRepository.findOne({
+      where: { post_id: postId },
+    });
+    if (!targetPost) {
+      throw new BadRequestException("포스트를 찾지 못했습니다.");
+    }
+
+    const res = await this.postsRepository.softDelete({ post_id: postId });
+    return {
+      affected: res?.affected,
+    };
   }
 }

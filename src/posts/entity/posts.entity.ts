@@ -10,7 +10,7 @@ export class PostsEntity extends CommonEntity {
     required: true,
   })
   @PrimaryGeneratedColumn({ type: "int" })
-  post_id: string;
+  post_id: number;
 
   @ApiProperty({
     example: "포스트 제목",

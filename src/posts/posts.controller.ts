@@ -6,10 +6,11 @@ import {
   Put,
   Param,
   UseGuards,
+  Delete,
 } from "@nestjs/common";
 import { PostsService } from "./posts.service";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
-import { WritePostDto } from "./dto/posts.dto";
+import { WritePostDto,ModifyPostDto } from "./dto/posts.dto";
 import { ApiBody, ApiOperation, ApiTags, ApiBearerAuth } from "@nestjs/swagger";
 
 @Controller("/posts")
@@ -17,9 +18,14 @@ import { ApiBody, ApiOperation, ApiTags, ApiBearerAuth } from "@nestjs/swagger";
 export class PostsController {
   constructor(private readonly postService: PostsService) {}
 
-  @Get("/list")
+  @Get("/")
   async getPosts() {
     return this.postService.getPosts();
+  }
+
+  @Get("/:postId")
+  async getPost(@Param("postId") postId: number) {
+    return this.postService.getPost(postId);
   }
 
   @ApiOperation({
@@ -29,17 +35,25 @@ export class PostsController {
   @ApiBody({
     type: WritePostDto,
   })
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  // @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard)
   @Post("/write")
   async writePosts(@Body() body: WritePostDto) {
     return this.postService.writePost(body);
   }
 
-  @Put("/modify/:postId")
-  async updateArticle(@Param("postId") postId, @Body() body) {
+  @Put("/")
+  async ModifyPost(
+    @Param("postId") postId: number,
+    @Body() body: ModifyPostDto
+  ) {
     const res = await this.postService.modifyPost({ postId, ...body });
 
     return res;
+  }
+
+  @Delete("/:postId")
+  async DeletePost(@Param("postId") postId: number) {
+    const res = await this.postService.deletePost({ postId });
   }
 }
