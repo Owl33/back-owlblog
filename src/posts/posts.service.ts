@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { PostsEntity } from "../entities/posts.entity";
+import { PostsEntity } from "./entity/posts.entity";
 import { Repository } from "typeorm";
 
 @Injectable()
@@ -16,19 +16,13 @@ export class PostsService {
     return test;
   }
 
-  async writePost(data: {
-    title: string;
-    contents: string;
-    category: string;
-    isDelete: number;
-  }) {
-    const { title, contents, category, isDelete } = data;
+  async writePost(data: { title: string; contents: string; category: string }) {
+    const { title, contents, category } = data;
     console.log(data);
     const post = await this.postsRepository.save({
       title: title,
       contents: contents,
       category: category,
-      is_delete: isDelete,
     });
     return post;
   }
@@ -38,16 +32,14 @@ export class PostsService {
     title: string;
     contents: string;
     category: string;
-    isDelete: number;
   }) {
-    const { postId, title, contents, category, isDelete } = data;
+    const { postId, title, contents, category } = data;
     const update = await this.postsRepository.update(
       { post_id: postId },
       {
         title: title,
         contents: contents,
         category: category,
-        is_delete: isDelete,
       }
     );
     console.log("dads");
