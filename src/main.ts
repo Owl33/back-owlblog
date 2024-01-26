@@ -25,13 +25,13 @@ async function bootstrap() {
   );
   app.enableCors({
     origin: [
-      'https://localhost:3000',
-      'https://localhost:3000',
-      'https://localhost:8080',
-      'https://localhost:8080',
-      'https://app.example.com',
+      "http://localhost:3000",
+      "https://localhost:3000",
+      "http://localhost:8080",
+      "https://localhost:8080",
+      "https://app.example.com",
     ],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
   });
 
