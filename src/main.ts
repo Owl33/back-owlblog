@@ -23,7 +23,17 @@ async function bootstrap() {
       transform: true,
     })
   );
-  app.enableCors();
+  app.enableCors({
+    origin: [
+      'https://localhost:3000',
+      'https://localhost:3000',
+      'https://localhost:8080',
+      'https://localhost:8080',
+      'https://app.example.com',
+    ],
+    methods: ["GET", "POST"],
+    credentials: true,
+  });
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup("api", app, document); // 'api-docs'는 swagger문서로 접속할 url을 말한다.
