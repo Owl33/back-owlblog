@@ -13,7 +13,4 @@ export class CommonEntity {
   update_at: Date;
   @DeleteDateColumn({ type: "timestamp", nullable: true })
   delete_at: Date;
-  @Column("tinyint", { unique: false, nullable: false })
-  
-  is_delete: number;
 }
