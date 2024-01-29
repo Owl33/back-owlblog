@@ -30,7 +30,7 @@ async function bootstrap() {
       "https://localhost:3000",
       "http://localhost:8080",
       "https://localhost:8080",
-      "https://app.example.com",
+      "https://back-owlblog.vercel.app",
     ],
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
