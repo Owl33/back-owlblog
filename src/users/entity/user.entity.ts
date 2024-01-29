@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { CommonEntity } from "../../common/common.entity";
+import { CommonEntity } from "@/common/common.entity";
 import { ApiProperty } from "@nestjs/swagger";
 @Entity("tb_users")
 export class UserEntity extends CommonEntity {
