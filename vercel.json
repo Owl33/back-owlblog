@@ -10,7 +10,7 @@
   "routes": [
     {
       "src": "/v1/(.*)",
-      "dest": "https://back-owlblog.vercel.app/v1/$1",
+      "dest": "src/main.ts",
       "methods": [
         "GET",
         "POST",
