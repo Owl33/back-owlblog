@@ -4,7 +4,7 @@ import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { ApiBody, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { LoginDto } from "./dto/auth.dto";
 @ApiTags("Auth API")
-@Controller("auth")
+@Controller("/v1/auth")
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

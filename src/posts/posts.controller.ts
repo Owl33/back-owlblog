@@ -14,7 +14,7 @@ import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { WritePostDto,ModifyPostDto } from "./dto/posts.dto";
 import { ApiBody, ApiOperation, ApiTags, ApiBearerAuth } from "@nestjs/swagger";
 
-@Controller("/posts")
+@Controller("/v1/posts")
 @ApiTags("Posts API")
 export class PostsController {
   constructor(private readonly postService: PostsService) {}
