@@ -25,7 +25,10 @@ async function bootstrap() {
     })
   );
   app.useGlobalInterceptors(new ResponseInterceptor());
-  app.enableCors();
+  app.enableCors({
+    origin: ['http://localhost:3000', 'https://localhost:3000','http://localhost:8080','https://localhost:8080'],
+    credentials: true,
+  });
 
  
 
