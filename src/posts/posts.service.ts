@@ -12,6 +12,7 @@ export class PostsService {
 
   async getPosts() {
     const posts = await this.postsRepository.find();
+    console.log(posts)
     return posts;
   }
 
@@ -27,7 +28,6 @@ export class PostsService {
 
   async writePost(data: { title: string; contents: string; category: string }) {
     const { title, contents, category } = data;
-    console.log(data);
     const post = await this.postsRepository.save({
       title: title,
       contents: contents,

@@ -2,6 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { HttpExceptionFilter } from "./common/http.exception.filter";
+import { ResponseInterceptor } from "./common/http.response.interceptor";
 // import { undefinedToNullInterceptor } from "./common/undefined.interceptor";
 import { ValidationPipe } from "@nestjs/common";
 
@@ -23,18 +24,14 @@ async function bootstrap() {
       transform: true,
     })
   );
-
+  app.useGlobalInterceptors(new ResponseInterceptor());
   app.enableCors({
-    origin: [
-      "http://localhost:3000",
-      "https://localhost:3000",
-      "http://localhost:8080",
-      "https://localhost:8080",
-      "https://back-owlblog.vercel.app",
-    ],
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
+
+
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup("api", app, document); // 'api-docs'는 swagger문서로 접속할 url을 말한다.

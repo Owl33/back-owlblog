@@ -5,6 +5,7 @@ import {
   Body,
   Put,
   Param,
+  Res,
   UseGuards,
   Delete,
 } from "@nestjs/common";
@@ -39,7 +40,8 @@ export class PostsController {
   // @UseGuards(JwtAuthGuard)
   @Post("/write")
   async writePosts(@Body() body: WritePostDto) {
-    return this.postService.writePost(body);
+    await this.postService.writePost(body);
+    return 'ss' 
   }
 
   @Put("/")
