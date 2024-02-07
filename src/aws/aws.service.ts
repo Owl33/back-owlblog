@@ -27,7 +27,10 @@ export class AwsService {
         await this.s3Client.send(command);
         
         // 업로드된 이미지의 URL을 반환합니다.
-        return `https://s3.${process.env.AWS_REGION}.amazonaws.com/${process.env.AWS_S3_BUCKET_NAME}/${file.originalname}`;
+        return {
+          url:`https://s3.${process.env.AWS_REGION}.amazonaws.com/${process.env.AWS_S3_BUCKET_NAME}/${file.originalname}`,
+          name:file.originalname
+        }
     
     }
 }
