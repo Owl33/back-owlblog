@@ -38,13 +38,13 @@ export class PostsController {
   })
   // @ApiBearerAuth()
   // @UseGuards(JwtAuthGuard)
-  @Post("/write")
+  @Post("/save")
   async writePosts(@Body() body: WritePostDto) {
-    await this.postService.writePost(body);
-    return 'ss' 
+    const res = await this.postService.writePost(body);
+    return res
   }
 
-  @Put("/")
+  @Put("/save")
   async ModifyPost(
     @Param("postId") postId: number,
     @Body() body: ModifyPostDto
@@ -57,5 +57,6 @@ export class PostsController {
   @Delete("/:postId")
   async DeletePost(@Param("postId") postId: number) {
     const res = await this.postService.deletePost({ postId });
+    return res;
   }
 }
