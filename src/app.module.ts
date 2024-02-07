@@ -7,7 +7,7 @@ import { ConfigService } from "@nestjs/config";
 import { PostsModule } from "./posts/posts.module";
 import { AuthModule } from "./auth/auth.module";
 import { UserModule } from "./users/user.module";
-
+import { AwsModule } from "./aws/aws.module";
 import * as path from "path";
 
 const setDatabase = TypeOrmModule.forRootAsync({
@@ -38,6 +38,7 @@ const setDatabase = TypeOrmModule.forRootAsync({
     UserModule,
     PostsModule,
     AuthModule,
+    AwsModule
   ],
   controllers: [AppController],
   providers: [AppService],
