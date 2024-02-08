@@ -8,10 +8,13 @@ import {
   Res,
   UseGuards,
   Delete,
+  Query,
+  ClassSerializerInterceptor,
+  UseInterceptors,
 } from "@nestjs/common";
 import { PostsService } from "./posts.service";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
-import { WritePostDto,ModifyPostDto } from "./dto/posts.dto";
+import { GetPostDto, WritePostDto, ModifyPostDto } from "./dto/posts.dto";
 import { ApiBody, ApiOperation, ApiTags, ApiBearerAuth } from "@nestjs/swagger";
 
 @Controller("/v1/posts")
@@ -20,13 +23,18 @@ export class PostsController {
   constructor(private readonly postService: PostsService) {}
 
   @Get("/")
+  @UseInterceptors(ClassSerializerInterceptor)
   async getPosts() {
-    return this.postService.getPosts();
+    const posts = await this.postService.getPosts();
+
+    return posts.map((post) => Object.assign(new GetPostDto(), post));
   }
 
   @Get("/:postId")
+  @UseInterceptors(ClassSerializerInterceptor)
   async getPost(@Param("postId") postId: number) {
-    return this.postService.getPost(postId);
+    const post = await this.postService.getPost(postId);
+    return Object.assign(new GetPostDto(), post);
   }
 
   @ApiOperation({
@@ -41,7 +49,7 @@ export class PostsController {
   @Post("/save")
   async writePosts(@Body() body: WritePostDto) {
     const res = await this.postService.writePost(body);
-    return res
+    return res;
   }
 
   @Put("/save/:postId")
