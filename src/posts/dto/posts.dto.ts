@@ -3,7 +3,7 @@ import { PostsEntity } from "../entity/posts.entity";
 import { IsNotEmpty, IsOptional, IsString, IsNumber } from "class-validator";
 
 export class getPostDto extends PickType(PostsEntity, [
-  "post_id",
+  "postId",
   "title",
   "contents",
   "category",

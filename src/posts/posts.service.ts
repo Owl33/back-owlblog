@@ -12,13 +12,13 @@ export class PostsService {
 
   async getPosts() {
     const posts = await this.postsRepository.find();
-    console.log(posts)
+    console.log(posts);
     return posts;
   }
 
   async getPost(postId: number) {
     const post = await this.postsRepository.findOne({
-      where: { post_id: postId },
+      where: { postId },
     });
     if (!post) {
       throw new BadRequestException("포스트를 찾지 못했습니다.");
@@ -43,15 +43,16 @@ export class PostsService {
     category: string;
   }) {
     const { postId, title, contents, category } = data;
+    console.log(data);
     const targetPost = await this.postsRepository.findOne({
-      where: { post_id: postId },
+      where: { postId },
     });
     if (!targetPost) {
       throw new BadRequestException("포스트를 찾지 못했습니다.");
     }
 
     const res = await this.postsRepository.update(
-      { post_id: postId },
+      { postId },
       {
         title: title,
         contents: contents,
@@ -65,13 +66,13 @@ export class PostsService {
   async deletePost(data: { postId: number }) {
     const { postId } = data;
     const targetPost = await this.postsRepository.findOne({
-      where: { post_id: postId },
+      where: { postId },
     });
     if (!targetPost) {
       throw new BadRequestException("포스트를 찾지 못했습니다.");
     }
 
-    const res = await this.postsRepository.softDelete({ post_id: postId });
+    const res = await this.postsRepository.softDelete({ postId });
     return {
       affected: res?.affected,
     };

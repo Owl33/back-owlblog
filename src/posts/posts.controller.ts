@@ -44,7 +44,7 @@ export class PostsController {
     return res
   }
 
-  @Put("/save")
+  @Put("/save/:postId")
   async ModifyPost(
     @Param("postId") postId: number,
     @Body() body: ModifyPostDto
