@@ -18,4 +18,6 @@ export class UserController {
   async register(@Body() body) {
     return this.userService.register(body);
   }
+
+  
 }

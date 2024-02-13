@@ -1,8 +1,9 @@
-import { Controller, UseGuards, Post, Req } from "@nestjs/common";
+import { Controller, UseGuards, Post, Req, Body, Res } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { ApiBody, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { LoginDto } from "./dto/auth.dto";
+import { RefreshAuthGuard } from "./guards/refresh-auth.guard";
 @ApiTags("Auth API")
 @Controller("/v1/auth")
 export class AuthController {
@@ -16,10 +17,44 @@ export class AuthController {
   @ApiBody({ type: LoginDto })
   @UseGuards(LocalAuthGuard)
   @Post("login")
-  async login(@Req() req) {
+  async login(@Req() req, @Res({ passthrough: true }) res) {
     //localGaurds에 담긴 값
-    const user = req.user;
-    //authService의 login으로 jwt sign 실행
-    return this.authService.login(user);
+    const { user } = req.user;
+    const accessToken = await this.authService.createAccessToken(user);
+    const refreshToken = await this.authService.createRefreshToken(user);
+    await this.authService.setRefreshToken(refreshToken, user.userId);
+    res.cookie("refreshToken", refreshToken, {
+      maxAge: 3 * 24 * 60 * 60 * 1000, //3d,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+      domain: "vercel.app",
+    });
+
+    return {
+      accessToken,
+      // refreshToken,
+    };
+  }
+
+  @Post("refresh")
+  async refresh(@Req() req, @Res({ passthrough: true }) res) {
+    // const { user } = req;
+
+    const accessToken = this.authService.refresh(req.cookies.refreshToken);
+
+    return accessToken;
+  }
+
+  @Post("signout")
+  async signout(@Req() req, @Res({ passthrough: true }) res) {
+    // const { user } = req;
+    // // const accessToken = this.authService.createAccessToken(user);
+    // await this.authService.removeRefreshToken(user.userId);
+
+    // res.cookie("accessToken", "");
+    res.cookie("refreshToken", "");
+    // // return user;
+    return;
   }
 }

@@ -37,6 +37,7 @@ export class PostsController {
     return Object.assign(new GetPostDto(), post);
   }
 
+  @ApiBearerAuth()
   @ApiOperation({
     summary: "게시글 작성 API",
     description: "게시글 작성한다.",
@@ -44,8 +45,7 @@ export class PostsController {
   @ApiBody({
     type: WritePostDto,
   })
-  // @ApiBearerAuth()
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post("/save")
   async writePosts(@Body() body: WritePostDto) {
     const res = await this.postService.writePost(body);

@@ -5,9 +5,11 @@ import { HttpExceptionFilter } from "./common/http.exception.filter";
 import { ResponseInterceptor } from "./common/http.response.interceptor";
 // import { undefinedToNullInterceptor } from "./common/undefined.interceptor";
 import { ValidationPipe } from "@nestjs/common";
+import * as cookieParser from "cookie-parser";
+import { NextFunction } from "express";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
   const options = new DocumentBuilder()
     .setTitle("Owl Blog API")
     .setDescription("Owl Blog API")
@@ -27,17 +29,16 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.enableCors({
     origin: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
     credentials: true,
   });
 
- 
+  app.use(cookieParser());
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup("api", app, document); // 'api-docs'는 swagger문서로 접속할 url을 말한다.
-  
 
   await app.listen(3000);
-  console.log(`Application is running on: ${await app.getUrl()}`);
-
 }
 bootstrap();

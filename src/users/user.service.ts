@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { UserEntity } from "./entity/user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { hash } from "bcrypt"; // 이부분이 추가되었습니다.
+import { hash, compare } from "bcrypt"; // 이부분이 추가되었습니다.
 
 @Injectable()
 export class UserService {
@@ -32,4 +32,6 @@ export class UserService {
       return user;
     }
   }
+
+
 }
