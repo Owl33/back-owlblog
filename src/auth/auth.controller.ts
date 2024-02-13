@@ -25,8 +25,8 @@ export class AuthController {
     res.cookie("refreshToken", refreshToken, {
       maxAge: 3 * 24 * 60 * 60 * 1000, //3d,
       secure: true,
-      httpOnly: true,
-      path: "/",
+      sameSite: "none",
+
       domain:
         process.env.NODE_ENV === "development" ? ".localhost" : ".vercel.app",
     });
