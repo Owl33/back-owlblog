@@ -29,7 +29,6 @@ export class AuthController {
       httpOnly: true,
       sameSite: "none",
       path: "/",
-      domain: ".vercel.app",
     });
 
     return {
