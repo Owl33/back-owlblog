@@ -8,7 +8,6 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { LocalStrategy } from "./strategies/local.strategy";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import { UserService } from "../users/user.service";
-import { RefreshStrategy } from "./strategies/refresh.strategy";
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity]),

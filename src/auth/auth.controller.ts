@@ -3,7 +3,6 @@ import { AuthService } from "./auth.service";
 import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { ApiBody, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { LoginDto } from "./dto/auth.dto";
-import { RefreshAuthGuard } from "./guards/refresh-auth.guard";
 @ApiTags("Auth API")
 @Controller("/v1/auth")
 export class AuthController {
