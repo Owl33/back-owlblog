@@ -5,8 +5,8 @@ import { HttpExceptionFilter } from "./common/http.exception.filter";
 import { ResponseInterceptor } from "./common/http.response.interceptor";
 // import { undefinedToNullInterceptor } from "./common/undefined.interceptor";
 import { ValidationPipe } from "@nestjs/common";
-import * as cookieParser from "cookie-parser";
-import { NextFunction } from "express";
+// import * as cookieParser from "cookie-parser";
+// import { NextFunction } from "express";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -34,7 +34,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  app.use(cookieParser());
+  // app.use(cookieParser());
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup("api", app, document); // 'api-docs'는 swagger문서로 접속할 url을 말한다.
