@@ -39,33 +39,33 @@ export class AuthService {
 
   async refresh(refreshToken) {
     //리프레쉬 토큰 검증
-    try {
-      const checkRefreshToken = await this.jwtService.verify(refreshToken, {
-        secret: this.configService.get("JWT_REFRESH_SECRET"),
-      });
+    // try {
+    const checkRefreshToken = await this.jwtService.verify(refreshToken, {
+      secret: this.configService.get("JWT_REFRESH_SECRET"),
+    });
 
-      const userId = checkRefreshToken.userId;
+    const userId = checkRefreshToken.userId;
 
-      //db에서 유저 찾기
-      const user = await this.userRepository.findOne({
-        where: {
-          userId,
-        },
-      });
+    //db에서 유저 찾기
+    const user = await this.userRepository.findOne({
+      where: {
+        userId,
+      },
+    });
 
-      const isRefreshTokenMatching = await compare(
-        refreshToken,
-        user.refreshToken
-      );
-      if (isRefreshTokenMatching) {
-        const accessToken = this.createAccessToken(user);
-        return accessToken;
-      } else {
-        throw new BadRequestException("리프레쉬 해독에 실패했습니다.");
-      }
-    } catch {
-      throw new BadRequestException("리프레쉬 토큰이 유효하지 않습니다.");
+    const isRefreshTokenMatching = await compare(
+      refreshToken,
+      user.refreshToken
+    );
+    if (isRefreshTokenMatching) {
+      const accessToken = this.createAccessToken(user);
+      return accessToken;
+    } else {
+      throw new BadRequestException("리프레쉬 해독에 실패했습니다.");
     }
+    // } catch {
+    //   throw new BadRequestException("리프레쉬 토큰이 유효하지 않습니다.");
+    // }
   }
 
   async createAccessToken(user) {

@@ -13,7 +13,7 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { PostsService } from "./posts.service";
-import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 import { GetPostDto, WritePostDto, ModifyPostDto } from "./dto/posts.dto";
 import { ApiBody, ApiOperation, ApiTags, ApiBearerAuth } from "@nestjs/swagger";
 
