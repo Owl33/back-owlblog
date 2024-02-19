@@ -34,6 +34,8 @@ async function bootstrap() {
       "https://www.owlblog.site",
       "https://owlblog.site",
     ],
+    exposedHeaders: ["Authorization", "refreshToken"],
+
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     preflightContinue: false,
     credentials: true,
