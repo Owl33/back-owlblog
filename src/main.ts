@@ -33,6 +33,7 @@ async function bootstrap() {
       "https://localhost:3000",
       "https://www.owlblog.site",
       "https://owlblog.site",
+      "https://owl-blog-gules.vercel.app",
     ],
     exposedHeaders: ["Authorization", "refreshToken"],
 
