@@ -36,7 +36,7 @@ async function bootstrap() {
       "https://owl-blog-gules.vercel.app",
     ],
     exposedHeaders: ["Authorization", "refreshToken"],
-
+    maxAge: 3600,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     preflightContinue: false,
     credentials: true,
