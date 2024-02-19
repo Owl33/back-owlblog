@@ -19,17 +19,18 @@ export class AuthController {
   async login(@Req() req, @Res({ passthrough: true }) res) {
     //localGaurds에 담긴 값
     const { user } = req.user;
-    console.log(process.env.NODE_ENV);
+
     const accessToken = await this.authService.createAccessToken(user);
     const refreshToken = await this.authService.createRefreshToken(user);
     await this.authService.setRefreshToken(refreshToken, user.userId);
     res.cookie("refreshToken", refreshToken, {
       maxAge: 3 * 24 * 60 * 60 * 1000, //3d,
       secure: true,
-      httpOnly: true,
+      httpOnly: false,
       sameSite: "none",
       path: "/",
-      domain: "localhost",
+      // domain: "localhost",
+      domain: "vercel.app",
     });
 
     return {
