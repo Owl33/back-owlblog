@@ -29,8 +29,12 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.enableCors({
     // origin: true,
-    origin: ["https://localhost:3000", "https://www.owlblog.site"],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    origin: [
+      "https://localhost:3000",
+      "https://www.owlblog.site",
+      "https://owlblog.site",
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     preflightContinue: false,
     exposedHeaders: ["refreshToken"],
     credentials: true,
