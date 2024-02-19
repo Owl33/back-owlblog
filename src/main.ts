@@ -5,7 +5,7 @@ import { HttpExceptionFilter } from "./common/http.exception.filter";
 import { ResponseInterceptor } from "./common/http.response.interceptor";
 // import { undefinedToNullInterceptor } from "./common/undefined.interceptor";
 import { ValidationPipe } from "@nestjs/common";
-import * as cookieParser from "cookie-parser";
+import cookieParser from "cookie-parser";
 // import { NextFunction } from "express";
 
 async function bootstrap() {
