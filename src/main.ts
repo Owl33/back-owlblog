@@ -29,15 +29,10 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.enableCors({
     // origin: "https://www.owlblog.site",
-    origin: true,
-    // origin: [
-    //   "https://localhost:3000",
-    //   "https://www.owlblog.site",
-    //   "https://owlblog.site",
-    //   "https://owl-blog-gules.vercel.app",
-    // ],
+    // origin: true,
+    origin: ["https://localhost:3000", "https://www.owlblog.site"],
     // exposedHeaders: ["Authorization", "refreshToken"],
-    preflightContinue: true,
+    preflightContinue: false,
     credentials: true,
   });
 
