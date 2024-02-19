@@ -5,7 +5,7 @@ import { HttpExceptionFilter } from "./common/http.exception.filter";
 import { ResponseInterceptor } from "./common/http.response.interceptor";
 // import { undefinedToNullInterceptor } from "./common/undefined.interceptor";
 import { ValidationPipe } from "@nestjs/common";
-// import * as cookieParser from "cookie-parser";
+import * as cookieParser from "cookie-parser";
 // import { NextFunction } from "express";
 
 async function bootstrap() {
@@ -28,17 +28,19 @@ async function bootstrap() {
   );
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.enableCors({
+    // origin: true,
     origin: ["https://localhost:3000", "https://owl-blog-gules.vercel.app"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
+    exposedHeaders: ["refreshToken"],
     credentials: true,
   });
 
-  // app.use(cookieParser());
+  app.use(cookieParser());
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup("api", app, document); // 'api-docs'는 swagger문서로 접속할 url을 말한다.
 
-  await app.listen(3000);
+  await app.listen(8080);
 }
 bootstrap();

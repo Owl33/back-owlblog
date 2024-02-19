@@ -16,7 +16,7 @@ import { UserService } from "../users/user.service";
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         return {
-          secret: configService.get<string>("JWT_SECRET"),
+          secret: configService.get<string>("JWT_ACCESS_SECRET"),
         };
       },
     }),

@@ -44,6 +44,7 @@ export class AuthService {
       secret: this.configService.get("JWT_REFRESH_SECRET"),
     });
 
+    console.log(refreshToken);
     const userId = checkRefreshToken.userId;
 
     //db에서 유저 찾기
