@@ -30,7 +30,7 @@ export class AuthController {
       sameSite: "none",
       path: "/",
       // domain: "localhost",
-      domain: ".owlblog.site",
+      domain: "owlblog.site",
     });
 
     return {
