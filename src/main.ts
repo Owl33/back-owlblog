@@ -32,6 +32,7 @@ async function bootstrap() {
     // origin: true,
     origin: ["https://localhost:3000", "https://www.owlblog.site"],
     // exposedHeaders: ["Authorization", "refreshToken"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     preflightContinue: false,
     credentials: true,
   });
