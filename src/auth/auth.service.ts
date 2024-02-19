@@ -64,6 +64,7 @@ export class AuthService {
     } else {
       throw new BadRequestException("리프레쉬 해독에 실패했습니다.");
     }
+
     // } catch {
     //   throw new BadRequestException("리프레쉬 토큰이 유효하지 않습니다.");
     // }
