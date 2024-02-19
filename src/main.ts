@@ -29,14 +29,14 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.enableCors({
     // origin: "https://www.owlblog.site",
-    origin: [
-      "https://localhost:3000",
-      "https://www.owlblog.site",
-      "https://owlblog.site",
-      "https://owl-blog-gules.vercel.app",
-    ],
-    exposedHeaders: ["Authorization", "refreshToken"],
-    maxAge: 3600,
+    origin: true,
+    // origin: [
+    //   "https://localhost:3000",
+    //   "https://www.owlblog.site",
+    //   "https://owlblog.site",
+    //   "https://owl-blog-gules.vercel.app",
+    // ],
+    // exposedHeaders: ["Authorization", "refreshToken"],
     preflightContinue: false,
     credentials: true,
   });
