@@ -28,7 +28,7 @@ async function bootstrap() {
   );
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.enableCors({
-    origin: true,
+    origin: ["https://localhost:3000", "https://owl-blog-gules.vercel.app"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     credentials: true,
