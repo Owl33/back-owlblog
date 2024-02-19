@@ -52,6 +52,7 @@ export class PostsController {
     return res;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put("/save/:postId")
   async ModifyPost(
     @Param("postId") postId: number,
@@ -62,6 +63,7 @@ export class PostsController {
     return res;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete("/:postId")
   async DeletePost(@Param("postId") postId: number) {
     const res = await this.postService.deletePost({ postId });
