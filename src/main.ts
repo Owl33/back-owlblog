@@ -37,7 +37,7 @@ async function bootstrap() {
     //   "https://owl-blog-gules.vercel.app",
     // ],
     // exposedHeaders: ["Authorization", "refreshToken"],
-    preflightContinue: false,
+    preflightContinue: true,
     credentials: true,
   });
 
