@@ -26,11 +26,18 @@ export class PostsService {
     return post;
   }
 
-  async writePost(data: { title: string; contents: string; category: string }) {
-    const { title, contents, category } = data;
+  async writePost(data: {
+    title: string;
+    contents: string;
+    description: string;
+
+    category: string;
+  }) {
+    const { title, contents, description, category } = data;
     const post = await this.postsRepository.save({
       title: title,
       contents: contents,
+      description: description,
       category: category,
     });
     return post;
@@ -40,9 +47,11 @@ export class PostsService {
     postId: number;
     title: string;
     contents: string;
+    description: string;
+
     category: string;
   }) {
-    const { postId, title, contents, category } = data;
+    const { postId, title, contents, category, description } = data;
     console.log(data);
     const targetPost = await this.postsRepository.findOne({
       where: { postId },
@@ -56,6 +65,7 @@ export class PostsService {
       {
         title: title,
         contents: contents,
+        description: description,
         category: category,
       }
     );
