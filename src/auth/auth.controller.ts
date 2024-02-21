@@ -29,7 +29,6 @@ export class AuthController {
       maxAge,
       secure: true,
       httpOnly: true,
-      sameSite: "strict",
       path: "/",
 
       // domain: "localhost",
@@ -40,7 +39,6 @@ export class AuthController {
       maxAge,
       secure: true,
       httpOnly: false,
-      sameSite: "strict",
       path: "/",
       domain: "owlblog.site",
     });
