@@ -29,19 +29,20 @@ export class AuthController {
       maxAge,
       secure: true,
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "strict",
       path: "/",
 
       // domain: "localhost",
-      // domain: "owlblog.site",
+      domain: "owlblog.site",
     });
     //만료일 return
     res.cookie("expired", expired.toISOString(), {
       maxAge,
       secure: true,
       httpOnly: false,
-      sameSite: "none",
+      sameSite: "strict",
       path: "/",
+      domain: "owlblog.site",
     });
 
     return {
