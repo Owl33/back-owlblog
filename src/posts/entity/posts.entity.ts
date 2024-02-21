@@ -28,6 +28,14 @@ export class PostsEntity extends CommonEntity {
   contents: string;
 
   @ApiProperty({
+    example: "안녕하세요 이번 포스트는",
+    description: "말 줄임",
+    required: false,
+  })
+  @Column("varchar", { unique: false, nullable: true })
+  description: string;
+
+  @ApiProperty({
     example: "개발",
     description: "분류할 카테고리",
     required: false,

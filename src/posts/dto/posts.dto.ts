@@ -6,6 +6,7 @@ export class GetPostDto extends PickType(PostsEntity, [
   "postId",
   "title",
   "contents",
+  "description",
   "category",
   "creation_at",
 ]) {
@@ -18,6 +19,7 @@ export class GetPostDto extends PickType(PostsEntity, [
 export class WritePostDto extends PickType(PostsEntity, [
   "title",
   "contents",
+  "description",
   "category",
 ]) {
   @IsNotEmpty()
@@ -26,6 +28,10 @@ export class WritePostDto extends PickType(PostsEntity, [
   @IsOptional()
   @IsString()
   contents: string;
+
+  @IsOptional()
+  @IsString()
+  description: string;
 
   @IsNotEmpty()
   @IsString()
