@@ -12,8 +12,14 @@ export class PostsService {
 
   async getPosts() {
     const posts = await this.postsRepository.find();
-    console.log(posts);
-    return posts;
+    const newPosts = posts.map((post) => {
+      post.contents = JSON.parse(post.contents).content.find(
+        (item: any) => item.type == "image"
+      );
+      return post;
+    });
+    console.log(newPosts);
+    return newPosts;
   }
 
   async getPost(postId: number) {
