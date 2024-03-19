@@ -36,6 +36,14 @@ export class PostsEntity extends CommonEntity {
   description: string;
 
   @ApiProperty({
+    example: "http://xxx.xdsds.",
+    description: "썸네일 주소",
+    required: false,
+  })
+  @Column("varchar", { unique: false, nullable: false })
+  thumbnail: string;
+
+  @ApiProperty({
     example: "개발",
     description: "분류할 카테고리",
     required: false,

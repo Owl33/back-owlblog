@@ -13,12 +13,10 @@ export class PostsService {
   async getPosts() {
     const posts = await this.postsRepository.find();
     const newPosts = posts.map((post) => {
-      post.contents = JSON.parse(post.contents).content.find(
-        (item: any) => item.type == "image"
-      );
-      return post;
+      const { contents, ...newPost } = post;
+      newPost.thumbnail = JSON.parse(post.thumbnail);
+      return newPost;
     });
-    console.log(newPosts);
     return newPosts;
   }
 
@@ -36,14 +34,15 @@ export class PostsService {
     title: string;
     contents: string;
     description: string;
-
+    thumbnail: string;
     category: string;
   }) {
-    const { title, contents, description, category } = data;
+    const { title, contents, description, thumbnail, category } = data;
     const post = await this.postsRepository.save({
       title: title,
       contents: contents,
       description: description,
+      thumbnail: thumbnail,
       category: category,
     });
     return post;
@@ -54,10 +53,10 @@ export class PostsService {
     title: string;
     contents: string;
     description: string;
-
+    thumbnail: string;
     category: string;
   }) {
-    const { postId, title, contents, category, description } = data;
+    const { postId, title, contents, description, thumbnail, category } = data;
     console.log(data);
     const targetPost = await this.postsRepository.findOne({
       where: { postId },
@@ -72,6 +71,7 @@ export class PostsService {
         title: title,
         contents: contents,
         description: description,
+        thumbnail: thumbnail,
         category: category,
       }
     );

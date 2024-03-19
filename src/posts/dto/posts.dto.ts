@@ -5,7 +5,7 @@ import { Transform } from "class-transformer";
 export class GetPostDto extends PickType(PostsEntity, [
   "postId",
   "title",
-  "contents",
+  "thumbnail",
   "description",
   "category",
   "creation_at",
@@ -19,6 +19,7 @@ export class GetPostDto extends PickType(PostsEntity, [
 export class WritePostDto extends PickType(PostsEntity, [
   "title",
   "contents",
+  "thumbnail",
   "description",
   "category",
 ]) {
@@ -32,6 +33,10 @@ export class WritePostDto extends PickType(PostsEntity, [
   @IsOptional()
   @IsString()
   description: string;
+
+  @IsOptional()
+  @IsString()
+  thumbnail: string;
 
   @IsNotEmpty()
   @IsString()
