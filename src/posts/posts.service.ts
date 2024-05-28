@@ -11,7 +11,11 @@ export class PostsService {
   ) {}
 
   async getPosts() {
-    const posts = await this.postsRepository.find();
+    const posts = await this.postsRepository.find({
+      order: {
+        creation_at: "DESC",
+      },
+    });
     const newPosts = posts.map((post) => {
       const { contents, ...newPost } = post;
       newPost.thumbnail = JSON.parse(post.thumbnail);
@@ -57,7 +61,6 @@ export class PostsService {
     category: string;
   }) {
     const { postId, title, contents, description, thumbnail, category } = data;
-    console.log(data);
     const targetPost = await this.postsRepository.findOne({
       where: { postId },
     });
