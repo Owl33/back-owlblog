@@ -22,6 +22,7 @@ export class ResponseInterceptor implements NestInterceptor {
         statusCode: context.switchToHttp().getResponse().statusCode,
         timestamp: new Date().toISOString(),
         path: context.switchToHttp().getRequest().url,
+        requestBody: request.body,
         message: "Success",
         data: data,
       }))
