@@ -32,7 +32,7 @@ export class AuthController {
       path: "/",
 
       // domain: "localhost",
-      domain: ".owlblog.site",
+      domain: ".owlblog.org",
     });
     //만료일 return
     res.cookie("expired", expired.toISOString(), {
@@ -40,7 +40,7 @@ export class AuthController {
       secure: true,
       httpOnly: false,
       path: "/",
-      domain: ".owlblog.site",
+      domain: ".owlblog.org",
     });
 
     return {

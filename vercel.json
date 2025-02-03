@@ -13,7 +13,7 @@
       "dest": "src/main.ts",
       "methods": ["GET", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"],
       "headers": {
-        "Access-Control-Allow-Origin": "https://www.owlblog.site"
+        "Access-Control-Allow-Origin": "https://owlblog.org"
       }
     }
   ]
