@@ -23,11 +23,12 @@ export class AwsService {
         Key: file.originalname,
         Body: file.buffer,
         ContentType: `image/${file.originalname.split(".").pop()}`,
+        // ACL: "public-read",
       });
       await this.s3Client.send(command);
 
       return {
-        url: `https://${this.configService.get("R2_BUCKET")}.${this.configService.get("R2_ENDPOINT")}/${file.originalname}`,
+        url: `${this.configService.get("R2_PUBLIC_URL")}/${file.originalname}`,
         name: file.originalname,
       };
     } catch (error) {
