@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { CommonEntity } from "../../common/common.entity";
 import { ApiProperty } from "@nestjs/swagger";
-@Entity("tb_users")
+@Entity({ schema: "owlblog", name: "tb_users" })
 export class UserEntity extends CommonEntity {
   @PrimaryGeneratedColumn({ type: "int", name: "user_id" })
   userId: number;

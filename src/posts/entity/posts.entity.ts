@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { CommonEntity } from "../../common/common.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
-@Entity("tb_posts")
+@Entity({ schema: "owlblog", name: "tb_posts" })
 export class PostsEntity extends CommonEntity {
   @ApiProperty({
     example: "1",
@@ -24,7 +24,7 @@ export class PostsEntity extends CommonEntity {
     description: "포스트 내용",
     required: false,
   })
-  @Column("longtext", { unique: false, nullable: true })
+  @Column("text", { unique: false, nullable: true })
   contents: string;
 
   @ApiProperty({

@@ -5,15 +5,15 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { AwsService } from './aws.service';
 
 
-@Controller('/v1/aws')
+@Controller('/v1/r2')
 @ApiTags("AWS File Upload")
 
 export class AwsController {
   constructor(private readonly awsService: AwsService) {}
 
   @ApiOperation({
-    summary: "AWS S3 FILE UPLOAD API",
-    description: "AWS S3 파일 업로드 API",
+    summary: "R2 FILE UPLOAD API",
+    description: "R2 파일 업로드 API",
   })
     @Post('/upload')
     @UseInterceptors(FileInterceptor('file'))

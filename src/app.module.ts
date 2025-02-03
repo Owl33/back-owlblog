@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { TypeOrmModule,  } from "@nestjs/typeorm";
+import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from "@nestjs/config";
 import { ConfigService } from "@nestjs/config";
 import { PostsModule } from "./posts/posts.module";
@@ -13,7 +13,7 @@ import * as path from "path";
 const setDatabase = TypeOrmModule.forRootAsync({
   inject: [ConfigService],
   useFactory: (configService: ConfigService) => ({
-    type: "mysql",
+    type: "postgres",
     host: configService.get<string>("DB_HOST"),
     port: configService.get<number>("DB_PORT"),
     database: configService.get<string>("DB_DATABASE"),
@@ -38,7 +38,7 @@ const setDatabase = TypeOrmModule.forRootAsync({
     UserModule,
     PostsModule,
     AuthModule,
-    AwsModule
+    AwsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

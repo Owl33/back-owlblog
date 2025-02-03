@@ -39,7 +39,6 @@ export class AuthService {
 
   async refresh(refreshToken) {
     //리프레쉬 토큰 검증
-    // try {
     const checkRefreshToken = await this.jwtService.verify(refreshToken, {
       secret: this.configService.get("JWT_REFRESH_SECRET"),
     });
@@ -65,9 +64,6 @@ export class AuthService {
       throw new BadRequestException("리프레쉬 해독에 실패했습니다.");
     }
 
-    // } catch {
-    //   throw new BadRequestException("리프레쉬 토큰이 유효하지 않습니다.");
-    // }
   }
 
   async createAccessToken(user) {
